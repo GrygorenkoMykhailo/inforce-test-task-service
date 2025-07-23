@@ -83,7 +83,7 @@ func TestRaribleController_GetNftTraitsRarity(t *testing.T) {
 						{
 							Key:    "foo",
 							Value:  "bar",
-							Rarity: "rare",
+							Rarity: 1,
 						},
 					},
 				}, nil
@@ -106,7 +106,7 @@ func TestRaribleController_GetNftTraitsRarity(t *testing.T) {
 	validBody, _ := json.Marshal(apis.GetNftTraitsRarityPayload{
 		CollectionId: "exists",
 		Properties: []apis.GetNftTraitsRarityProperties{
-			{Key: "foo", Value: "bar"},
+			{ Key: "foo", Value: "bar" },
 		},
 	})
 
@@ -122,7 +122,7 @@ func TestRaribleController_GetNftTraitsRarity(t *testing.T) {
 	assert.Len(t, resp.Traits, 1)
 	assert.Equal(t, "foo", resp.Traits[0].Key)
 	assert.Equal(t, "bar", resp.Traits[0].Value)
-	assert.Equal(t, "rare", resp.Traits[0].Rarity)
+	assert.Equal(t, 1, resp.Traits[0].Rarity)
 
 	w2 := httptest.NewRecorder()
 	badReq, _ := http.NewRequest(http.MethodPost, "/nft-rarity", bytes.NewReader([]byte("{bad json")))
@@ -135,7 +135,7 @@ func TestRaribleController_GetNftTraitsRarity(t *testing.T) {
 	badPayloadBody, _ := json.Marshal(apis.GetNftTraitsRarityPayload{
 		CollectionId: "not-exist",
 		Properties: []apis.GetNftTraitsRarityProperties{
-			{Key: "foo", Value: "bar"},
+			{ Key: "foo", Value: "bar" },
 		},
 	})
 

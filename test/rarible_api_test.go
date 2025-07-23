@@ -18,15 +18,12 @@ func TestRaribleApi_TestGetNftOwnershipById(t *testing.T) {
 		ItemID:     "ETHEREUM:0x1234:1",
 		Contract:   "0x1234",
 		Collection: "0x1234",
-		TokenID:    "1",
+		TokenID:    1,
 		Owner:      "0xowner",
-		Value:      "1",
+		Value:      1,
 		CreatedAt:  time.Now(),
 		LastUpdatedAt: time.Now(),
-		Creators:   []apis.GetNftOwnershipsByIdCreator{},
-		LazyValue:  "0",
-		Pending:    []interface{}{},
-		OriginOrders: []interface{}{},
+		LazyValue:  0,
 		Version:    1,
 	}
 
@@ -56,7 +53,7 @@ func TestRaribleApi_TestGetNftTraitsRarity(t *testing.T) {
 			{
 				Key: "foo",
 				Value: "bar",
-				Rarity: "rare",
+				Rarity: 1,
 			},
 		},
 	}
