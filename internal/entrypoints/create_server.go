@@ -3,7 +3,9 @@ package entrypoints
 import (
 	"inforce-test-task-service/internal/config"
 	"inforce-test-task-service/internal/routes"
+	"os"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	sloggin "github.com/samber/slog-gin"
 )
@@ -13,6 +15,12 @@ func NewServer(dependencies *config.AppDependencies) *gin.Engine {
 
 	server.Use(sloggin.New(dependencies.Logger))
 	server.Use(gin.Recovery())
+	server.Use(cors.New(cors.Config{
+		AllowOrigins: []string{ os.Getenv("http://localhost:5000") },
+		AllowMethods: []string{ "GET", "POST" },
+		AllowCredentials: true,
+	}))
+
 	createServerRoutes(server, dependencies)
 
 	return server
