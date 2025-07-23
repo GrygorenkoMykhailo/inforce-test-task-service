@@ -1,19 +1,10 @@
-package api
+package apis
 
-import (
-	"net/http"
-	"os"
-	"time"
-)
+import "time"
 
-type RaribleApi interface {
-	GetNftOwnershipsById(id string) (*GetNftOwnershipsByIdResponse, error)
-}
-
-type raribleApiImpl struct {}
-
-func NewRaribleApi() RaribleApi {
-	return &raribleApiImpl{}
+type RaribleApiErrorResponse struct {
+	Code string
+	Message string
 }
 
 type GetNftOwnershipsByIdCreator struct {
@@ -39,12 +30,22 @@ type GetNftOwnershipsByIdResponse struct {
 	Version      	int           `json:"version"`
 }
 
-func (api *raribleApiImpl) GetNftOwnershipsById(id string) (*GetNftOwnershipsByIdResponse, error) {
-	raribleApiBaseUrl := os.Getenv("RARIBLE_API_URL")
-	http.DefaultClient
+type NtfTrait struct {
+	Key    string `json:"key"`
+	Value  string `json:"value"`
+	Rarity string `json:"rarity"`
+}
 
-	req, err := http.NewRequest("GET", raribleApiBaseUrl + "/ownerships/" + id, nil)
-	if err != nil {
+type GetNftTraitsRarityResponse struct {
+	Traits []NtfTrait `json:"traits"`
+}
 
-	}
+type GetNftTraitsRarityProperties struct {
+	Key string `json:"key"`
+	Value string `json:"value"`
+}
+
+type GetNftTraitsRarityPayload struct {
+	CollectionId string `json:"collectionId"`
+	Properties []GetNftTraitsRarityProperties `json:"properties"`
 }
