@@ -16,7 +16,7 @@ func NewServer(dependencies *config.AppDependencies) *gin.Engine {
 	server.Use(sloggin.New(dependencies.Logger))
 	server.Use(gin.Recovery())
 	server.Use(cors.New(cors.Config{
-		AllowOrigins: []string{ os.Getenv("http://localhost:5000") },
+		AllowOrigins: []string{ os.Getenv("FRONTEND_ORIGIN") },
 		AllowMethods: []string{ "GET", "POST" },
 		AllowCredentials: true,
 	}))
