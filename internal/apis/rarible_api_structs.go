@@ -176,7 +176,7 @@ type NtfTrait struct {
 }
 
 type GetNftTraitsRarityResponse struct {
-
+	Continuation string `json:"continuation"`
 	Traits []NtfTrait `json:"traits"`
 }
 
