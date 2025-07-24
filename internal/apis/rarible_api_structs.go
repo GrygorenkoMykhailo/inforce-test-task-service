@@ -7,11 +7,6 @@ type RaribleApiErrorResponse struct {
 	Message string
 }
 
-type GetNftOwnershipsByIdCreator struct {
-	Account string `json:"account"`
-	Value   int    `json:"value"`
-}
-
 type GetNftOwnershipsByIdResponse struct {
 	ID            string    `json:"id"`
 	Blockchain    string    `json:"blockchain"`
