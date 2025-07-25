@@ -1,5 +1,7 @@
 replicaCount: 1
 
+nameOverride: go-rarible-service
+
 image:
   repository: dockerhubuser105/invoice-test-task
   pullPolicy: Always

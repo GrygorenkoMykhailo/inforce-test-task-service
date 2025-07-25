@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: go-service
+  name: {{ .Values.nameOverride }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: go-service
+      app: {{ .Values.nameOverride }}
   template:
     metadata:
       labels:
-        app: go-service
+        app: {{ .Values.nameOverride }}
     spec:
       containers:
-        - name: go-service
+        - name: {{ .Values.nameOverride }}
           imagePullPolicy: Always
           image: "{{ .Values.goService.image }}:{{ .Values.goService.imageTag }}"
           ports:
