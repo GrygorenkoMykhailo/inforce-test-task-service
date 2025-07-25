@@ -17,7 +17,7 @@ func main() {
 	}
 
 	server := entrypoints.NewServer(&dependencies)
-	err := server.Run("127.0.0.1:" + os.Getenv("PORT"))
+	err := server.Run("0.0.0.0:" + os.Getenv("PORT"))
 	if err != nil {
 		logger.Error("Failed to start server", "err", err.Error())
 	}

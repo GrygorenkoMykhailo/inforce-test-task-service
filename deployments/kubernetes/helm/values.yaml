@@ -1,0 +1,25 @@
+replicaCount: 1
+
+image:
+  repository: dockerhubuser105/invoice-test-task
+  pullPolicy: Always
+  tag: latest
+
+goService:
+  image: docker.io/dockerhubuser105/invoice-test-task
+  imageTag: go-service
+  port: 8080
+  envSecretName: go-service-env
+  env:
+    APP_ENV_FILE_PATH: /etc/.env
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations: {}
+  hosts:
+    - host: api.domain
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []

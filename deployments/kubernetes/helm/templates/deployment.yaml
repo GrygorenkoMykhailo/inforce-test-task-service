@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-service
+  template:
+    metadata:
+      labels:
+        app: go-service
+    spec:
+      containers:
+        - name: go-service
+          imagePullPolicy: Always
+          image: "{{ .Values.goService.image }}:{{ .Values.goService.imageTag }}"
+          ports:
+            - containerPort: {{ .Values.goService.port }}
+          env:
+            - name: APP_ENV_FILE_PATH
+              value: "{{ .Values.goService.env.APP_ENV_FILE_PATH }}"
+          volumeMounts:
+            - name: env-volume
+              mountPath: {{ .Values.goService.env.APP_ENV_FILE_PATH }}
+              subPath: '.env'
+      volumes:
+        - name: env-volume
+          secret: 
+            secretName: {{ .Values.goService.envSecretName }}
