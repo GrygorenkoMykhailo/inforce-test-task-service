@@ -6,14 +6,14 @@ COPY . .
 
 RUN go mod tidy
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o app ./cmd/main.go 
+RUN CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/main.go 
 
 
 FROM alpine
 
-WORKDIR /app
+WORKDIR /root
 
-COPY --from=builder app ./
+COPY --from=builder /app/server ./
 
-ENTRYPOINT [ "/app/app" ]
+ENTRYPOINT [ "./server" ]
 

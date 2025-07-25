@@ -17,5 +17,6 @@ func LoadEnv(logger *slog.Logger) {
 	err := godotenv.Load(envFilePath)
 	if err != nil {
 		logger.Error("Failed to parse env", "err", err)
+		os.Exit(1)
 	}
 }
